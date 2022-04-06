@@ -1,0 +1,19 @@
+body {
+  background-color: black;
+}
+.container {
+  min-height: 100vh;
+  flex-direction: column;
+}
+.login {
+  background-color: rgb(27, 185, 84);
+  color: #fff;
+  border-radius: 2rem;
+  cursor: pointer;
+}
+.login:hover {
+  background-color: rgb(20, 134, 62);
+}
+.img {
+  width: 50%;
+}
