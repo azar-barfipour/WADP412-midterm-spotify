@@ -13,6 +13,8 @@
   "scripts": {
     "devStart": "nodemon server.js",
     "start": "node server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run devStart\" \"npm run client\" ",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "keywords": [],
@@ -26,6 +28,7 @@
     "spotify-web-api-node": "^5.0.2"
   },
   "devDependencies": {
+    "concurrently": "^7.1.0",
     "nodemon": "^2.0.15"
   }
 }
