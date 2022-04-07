@@ -1,29 +1,31 @@
 {
-  "name": "musify-app",
+  "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "engines": {
-    "node": "16.13.1"
+    "node": ">=10"
   },
   "cacheDirectories": [
-    "server/node_modules",
+    "node_modules",
     "client/node_modules"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "npm start --prefix server",
+    "devStart": "nodemon server.js",
+    "start": "node server.js",
     "heroku-postbuild": "cd client && npm install && npm run build"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/azar-barfipour/WADP412-midterm-spotify.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/azar-barfipour/WADP412-midterm-spotify/issues"
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "spotify-web-api-node": "^5.0.2"
   },
-  "homepage": "https://github.com/azar-barfipour/WADP412-midterm-spotify#readme"
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
 }
