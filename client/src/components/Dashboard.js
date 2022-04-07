@@ -20,7 +20,7 @@ function Dashboard({ code }) {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/login", { code })
+      .post(`${process.env.REACT_APP_REDIRECT_URL}login`, { code })
       .then((res) => {
         setAccessToken(res.data.accessToken);
         setRefreshToken(res.data.refreshToken);
