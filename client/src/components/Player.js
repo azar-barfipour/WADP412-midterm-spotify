@@ -7,6 +7,7 @@ function Player({ accessToken, trackUri }) {
   return (
     <div className={classes["player-wrapper"]}>
       <SpotifyPlayer
+        device_id={accessToken}
         token={accessToken}
         showSaveIcon
         uris={trackUri ? [trackUri] : []}
