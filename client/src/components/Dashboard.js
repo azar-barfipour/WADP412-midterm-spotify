@@ -43,6 +43,7 @@ function Dashboard({ code }) {
     spotifyApi.searchTracks(search).then((res) => {
       setSearchResults(
         res.body.tracks.items.map((track) => {
+          console.log(track);
           const smallestImage = track.album.images.reduce((smallest, image) => {
             if (image.height < smallest.height) return image;
             return smallest;
