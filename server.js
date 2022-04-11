@@ -8,8 +8,10 @@ const path = require("path");
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 3001;
+const lyricsFinder = require("lyrics-finder");
 
 // app.use(express.static(path.resolve(__dirname, "./client/build")));
 
@@ -36,6 +38,12 @@ app.post("/login", (req, res) => {
     });
 });
 
+app.get("/lyrics", async (req, res) => {
+  const lyrics =
+    (await lyricsFinder(req.query.artist, res.query.track)) ||
+    "No Lyrics Found";
+  res.json({ lyrics });
+});
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "client/build")));
   app.get("*", (req, res) => {

@@ -4,9 +4,7 @@ function Favourites({ tracks }) {
   return (
     <div>
       {tracks.map((track) => {
-        // if (track.title === "Ragan Whiteside") {
-        return <div>{`fav: ${track.title}`}</div>;
-        // }
+        return <div></div>;
       })}
     </div>
   );

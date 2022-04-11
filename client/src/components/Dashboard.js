@@ -17,6 +17,7 @@ function Dashboard({ code }) {
   const [search, setSearch] = useState();
   const [searchResults, setSearchResults] = useState([]);
   const [playing, setPlaying] = useState();
+  const [lyrics, setLyrics] = useState("");
 
   useEffect(() => {
     axios
@@ -43,7 +44,6 @@ function Dashboard({ code }) {
     spotifyApi.searchTracks(search).then((res) => {
       setSearchResults(
         res.body.tracks.items.map((track) => {
-          console.log(track);
           const smallestImage = track.album.images.reduce((smallest, image) => {
             if (image.height < smallest.height) return image;
             return smallest;
@@ -62,7 +62,24 @@ function Dashboard({ code }) {
   const chooseTrack = (track) => {
     setPlaying(track);
     setSearch("");
+    setLyrics("");
   };
+
+  useEffect(() => {
+    if (!playing) return;
+    axios
+      .get(`${process.env.REACT_APP_REDIRECT_URL}lyrics`, {
+        params: {
+          track: playing.title,
+          artist: playing.artist,
+        },
+      })
+      .then((res) => {
+        console.log("client");
+        console.log(res.data.lyrics);
+        setLyrics(res.data.lyrics);
+      });
+  }, [playing]);
 
   return (
     <>
@@ -76,6 +93,11 @@ function Dashboard({ code }) {
         ></Form.Control>
         {searchResults && (
           <Tracks tracks={searchResults} chooseTrack={chooseTrack} />
+        )}
+        {searchResults.length === 0 && (
+          <div className="text-center" style={{ color: "#fff" }}>
+            {lyrics}
+          </div>
         )}
       </Container>
       <Player accessToken={accessToken} trackUri={playing?.uri} />

@@ -5,8 +5,8 @@ function Track({ track, chooseTrack }) {
   return (
     <div
       onClick={playHandler}
+      style={{ overflowY: "auto", cursor: "pointer" }}
       className="m-3 d-flex align-items-center"
-      style={{ overflowY: "auto" }}
     >
       <img src={track.albumUrl.url}></img>
       <div className="m-3 text-light">

@@ -1,8 +1,14 @@
 import SpotifyPlayer from "react-spotify-web-playback";
 import classes from "./Player.module.css";
+import { useState, useEffect } from "react";
 
 function Player({ accessToken, trackUri }) {
-  console.log(trackUri);
+  const [play, setPlay] = useState(false);
+
+  useEffect(() => {
+    setPlay(true);
+  }, [trackUri]);
+
   if (!accessToken) return null;
   return (
     <div className={classes["player-wrapper"]}>
@@ -10,6 +16,10 @@ function Player({ accessToken, trackUri }) {
         device_id={accessToken}
         token={accessToken}
         showSaveIcon
+        callback={(state) => {
+          if (!state.isPlaying) setPlay(false);
+        }}
+        play={play}
         uris={trackUri ? [trackUri] : []}
         className={classes["player"]}
         styles={{
